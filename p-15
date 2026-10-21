@@ -1,0 +1,58 @@
+本题要求对任意给定的正整数N，求方程X 
+2
+ +Y 
+2
+ =N的全部正整数解。
+
+输入格式：
+输入在一行中给出正整数N（≤10000）。
+
+输出格式：
+输出方程X 
+2
+ +Y 
+2
+ =N的全部正整数解，其中X≤Y。每组解占1行，两数字间以1空格分隔，按X的递增顺序输出。如果没有解，则输出No Solution。
+
+输入样例1：
+884
+输出样例1：
+10 28
+20 22
+输入样例2：
+11
+输出样例2：
+No Solution
+#include<iostream>
+using namespace std;
+int main(){
+    int N;
+    cin >> N;
+    bool found = false;
+    for(int X = 1;X < 100;X++){
+        for(int Y = X;Y < 100;Y++){
+            if(X*X + Y*Y == N){
+                cout << X << " " << Y <<endl;
+                found = true;
+            }
+        }
+    }
+    if(!found) cout << "No Solution" << endl;
+}
+这里有一个输入要点，那么要规定xy均不大于100，从而最后的结果不会大于10000
+还有一个我在这学到的是标志位的运用
+bool found = false;
+found = true;
+这个标志位会引导程序的结果到true
+关于这个标志位的问题也可以采用其他的方式解决:
+if else
+而对于 if else 可以用函数本身的返回机制 return 0
+还可以用计数器机制
+// 循环结束后，用 if-else 判断计数器
+    if (count > 0) {
+        // 什么都不用做，因为解已经在循环里全部打印出来了
+    } else {
+        cout << "No Solution" << endl;
+    }
+    return 0;
+}
