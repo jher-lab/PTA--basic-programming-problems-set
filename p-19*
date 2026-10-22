@@ -1,0 +1,53 @@
+你的程序要读入一行文本，其中以空格分隔为若干个单词，以.结束。你要输出每个单词的长度。这里的单词与语言无关，可以包括各种符号，比如it's算一个单词，长度为4。注意，行中可能出现连续的空格；最后的.不计算在内。
+
+输入格式：
+输入在一行中给出一行文本，以.结束
+
+提示：用scanf("%c",...);来读入一个字符，直到读到.为止。
+
+输出格式：
+在一行中输出这行文本对应的单词的长度，每个长度之间以空格隔开，行末没有最后的空格。
+
+输入样例：
+It's great to see you here.
+输出样例：
+4 5 2 3 3 4
+#include<iostream>
+#include<cstdio>
+using namespace std;
+int main(){
+    char c;
+    int count = 0;
+    bool first = true;
+    while(scanf("%c",&c) != EOF && c != '.'){[1]
+        if(c == ' '){
+            if(count > 0){
+                if(!first)
+                    cout << " ";
+                cout << count;
+                first = false;
+                 count = 0; 
+            }
+            }
+                else{
+                    count++;   
+        }
+    }
+        if(count > 0){
+            if(!first){
+                cout << " ";
+            }
+            cout << count;
+        }
+        return 0;
+}
+[1]直到遇到句号这个程序类似于一个循环的一个程序条件进行终止
+一下还有很多替换的写法：
+int char;
+while((ch = getchar())!= EOF && ch != '.' )
+int char;
+while(scanf("%c",&ch) == 1 && ch != '.')
+循环逻辑:所属前置判断条件为
+大前提：当读取字符时，并没有读取其最后一个句号，也就是结束的标志，
+小条件嵌套：
+并不是第一个字符，并且读取到空格，计数器并不为零，那么输出空格
