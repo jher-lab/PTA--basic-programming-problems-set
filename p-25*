@@ -1,0 +1,54 @@
+本题要求编写程序，计算N个有理数的平均值。
+
+输入格式：
+输入第一行给出正整数N（≤100）；第二行中按照a1/b1 a2/b2 …的格式给出N个分数形式的有理数，其中分子和分母全是整形范围内的整数；如果是负数，则负号一定出现在最前面。
+
+输出格式：
+在一行中按照a/b的格式输出N个有理数的平均值。注意必须是该有理数的最简分数形式，若分母为1，则只输出分子。
+
+输入样例1：
+4
+1/2 1/6 3/6 -5/10
+输出样例1：
+1/6
+输入样例2：
+2
+4/3 2/3
+输出样例2：
+1
+#include<iostream>
+#include<cmath>
+using namespace std;
+long long gcd(long long a,long long b){
+    return b == 0 ? a : gcd(b,a % b);
+}
+int main(){
+    int n;
+    if(!(cin >> n)) return 0;
+    long long sum_a = 0;
+    long long sum_b = 1;
+    for(int i = 0;i < n; i++){
+        long long a,b;
+        char slash;
+        cin >> a >> slash >> b;
+        long long new_a = sum_a * b + sum_b * a;
+        long long new_b = sum_b * b;
+        long long g = gcd(abs(new_a),abs(new_b));
+        sum_a = new_a / g;
+        sum_b = new_b / g;
+    }
+    sum_b *= n;
+    long long g = gcd(abs(sum_a),abs(sum_b));
+    sum_a /= g;
+        sum_b /= g;
+        if(sum_a == 0){
+            cout << 0;
+        }
+        else if(sum_b == 1){
+            cout << sum_a;
+        }
+        else{
+            cout << sum_a << "/" << sum_b << endl;
+        }
+    }
+    
