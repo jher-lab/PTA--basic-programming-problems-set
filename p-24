@@ -1,0 +1,40 @@
+本题要求编写程序，计算两个有理数的和。
+
+输入格式：
+输入在一行中按照a1/b1 a2/b2的格式给出两个分数形式的有理数，其中分子和分母全是整形范围内的正整数。
+
+输出格式：
+在一行中按照a/b的格式输出两个有理数的和。注意必须是该有理数的最简分数形式，若分母为1，则只输出分子。
+
+输入样例1：
+1/3 1/6
+输出样例1：
+1/2
+输入样例2：
+4/3 2/3
+输出样例2：
+2
+#include<iostream>
+#include<cmath>
+using namespace std;
+long long gcd(long long a,long long b){
+    return b == 0 ? a : gcd(b,a % b);
+}
+int main(){
+    long long a,b,c,d;
+    scanf("%lld/%lld  %lld/%lld",&a,&b,&c,&d);
+    long long p = a * d + b * c;
+    long long q = b * d;
+    if(p == 0){
+        cout << 0;
+        return 0;
+    }
+    long long g = gcd(abs(p),abs(q));
+    p /= g;
+    q /= g;
+    if(q == 1) cout << p;
+    else cout << p << "/" << q << endl;
+}
+辗转相除法 return b == 0 ? a : gcd(b,a % b);得到两个数的最大公约数
+逻辑上就是分数加法，对分子和分母分别处理。
+其中的特殊情况，就是分子等于零的时候，整个分数会输出一个零。
